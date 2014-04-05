@@ -1,5 +1,5 @@
 #include "../heads/intro_state.h"
-#include "../heads/characters/subj.h"
+#include "../heads/characters/dude.h"
 #include <iostream>
 
 IntroState::IntroState() : area(MAIN_MENU_AREA) {}
@@ -15,20 +15,16 @@ void IntroState::init(Game &game) {
   SDL_Surface *screen = NULL;
   screen = game.screen;
 
-  image = sdlf::loadImage("images/background/test.jpg");
+  image = sdlf::loadSprite("images/background/dude.png");
   if (!image) {
       std::cout << "image null\n";
       printf("IMG_Load: %s\n", IMG_GetError());
   }
 
-  //Uint32 color = SDL_MapRGB(optimizedImage->format, 0, 0, 0);
-  //SDL_SetColorKey(optimizedImage, SDL_SRCCOLORKEY, color);
-  //SDL_SetColorKey( image, SDL_SRCCOLORKEY, SDL_MapRGBA(image->format, 255, 255, 255,255) );
-  //SDL_SetColorKey( image, SDL_SRCCOLORKEY, SDL_MapRGBA(image->format, NULL, NULL, NULL,SDL_ALPHA_TRANSPARENT) );
   SDL_Event event;
   int key_code;
   Timer fps;
-  Subj subj;
+  Dude dude;
   int i = 0;
 
   while(is_active) {
@@ -48,20 +44,17 @@ void IntroState::init(Game &game) {
       }
     }
 
-    //SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 0, 0, 0 ) );
+    SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 0, 0, 0 ) );
     showAnimation(screen);
     
-    sdlf::apply_surface(0, 0, image, screen, subj.getClipRun(0));
-    //sdlf::apply_surface(150, 10, image, screen, subj.getClipRun(1));
-    //sdlf::apply_surface(300, 0, image, screen, subj.getClipRun(2));
-    //sdlf::apply_surface(300, 0, image, screen, subj.getClipRun(3));
-    //sdlf::apply_surface(600, 0, image, screen, subj.getClipRun(i));
+    sdlf::apply_surface(0, 335, image, screen, dude.getClipRun(i));
 
     SDL_Flip(screen);
     sdlf::delay(fps);
+
     i++;
     if (i>7) {
-      i = 1;
+      i = 0;
     }
   }
 

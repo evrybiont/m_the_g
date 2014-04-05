@@ -2,11 +2,13 @@
 
 namespace sdlf {
 
-  SDL_Surface *loadImage(std::string path) {
+  SDL_Surface *loadSprite(std::string path) {
     SDL_Surface *image = NULL;
     SDL_Surface *optimizedImage = NULL;
 
     image = IMG_Load(path.c_str());
+
+    SDL_SetColorKey( image, SDL_SRCCOLORKEY, SDL_MapRGBA(image->format, 255, 255, 255,255) );
 
     if (image) {
       optimizedImage = SDL_DisplayFormat(image);

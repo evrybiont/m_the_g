@@ -6,7 +6,7 @@
 #include "../heads/timer.h"
 
 namespace sdlf {
-  SDL_Surface *loadImage(std::string);
+  SDL_Surface *loadSprite(std::string);
   void apply_surface(int, int, SDL_Surface*, SDL_Surface*, SDL_Rect*);
   void delay(Timer&);
 }
